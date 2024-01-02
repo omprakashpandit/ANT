@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="ContactProject" default="dist" basedir=".">
+ 
+  <property name="src" location="src"/>
+  <property name="build" location="build"/>
+  <property name="dist" location="dist"/>
+  <property name="lib" location="lib"/>
+  <property name="JdbcDriver" value="mysql-connector-j-8.2.0.jar"/>
+ 
+  <target name="init">
+    <tstamp/>
+    <mkdir dir="${build}"/>
+  </target>
+ 
+  <target name="compile" depends="init" description="compile the source">
+    <javac srcdir="${src}" destdir="${build}"/>
+  </target>
+ 
+  <target name="dist" depends="compile" description="generate the distribution">
+    <mkdir dir="${dist}"/>
+ 
+    <jar jarfile="${dist}/ContactManager-${DSTAMP}.jar" basedir="${build}">
+            <manifest>
+                <attribute name="Main-Class" value="com.pak.Contact"/>
+                <attribute name="Class-Path" value="${JdbcDriver}"/>
+            </manifest>           
+    </jar>
+     
+    <copy file="${lib}\${JdbcDriver}" todir="${dist}" overwrite="true" />
+     
+  </target>
+	
+	<target name="run" depends="dist">
+	        <java jar="${dist}/ContactManager-${DSTAMP}.jar" fork="true"/>
+	</target>
+
+ 
+  <target name="clean" description="clean up">
+    <delete dir="${build}"/>
+    <delete dir="${dist}"/>
+  </target>
+</project>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="hello">
+  <target name="hello">
+    <echo message="First ANT Program.."/>
+  </target>
+</project>

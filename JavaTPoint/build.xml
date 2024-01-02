@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="antProject" default="run">  
+   
+	<property name="student-name" value = "RIYA"></property>  
+   
+	<target name="run" depends="compile"> 
+      <echo>${student-name} is our student.</echo>   
+        <java classname = "com.pak.Hello">  
+            <classpath path="test"></classpath>  
+        </java>  
+    </target>  
+    
+    <target name="compile">  
+        <javac includeantruntime="false" srcdir="./src" destdir = "test"></javac>  
+    </target>
+    
+    <target name="clean">
+   		<delete>
+     		<fileset dir="./test/com/pak" includes="*.class"/>
+  	 	</delete>
+ 	</target>
+	
+	<target name="jar">
+	        <mkdir dir="build/jar"/>
+	        <jar destfile="build/jar/Hello.jar" basedir="build/classes">
+	            <manifest>
+	                <attribute name="Main-Class" value="com.pak.Hello"/>
+	            </manifest>
+	        </jar>
+	 </target> 
+	
+</project>  
